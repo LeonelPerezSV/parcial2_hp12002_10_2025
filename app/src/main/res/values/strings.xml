@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AppIntegradaMBaaS</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarme</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="remember_me">Recordarme</string>
+    <string name="home_title">Home</string>
+    <string name="profile_title">Perfil</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="save">Guardar</string>
+</resources>

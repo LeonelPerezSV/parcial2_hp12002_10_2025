@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075853925855",
+    "project_id": "parcial2-335e0",
+    "storage_bucket": "parcial2-335e0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075853925855:android:f09dad2d7a4017abd2f86a",
+        "android_client_info": {
+          "package_name": "com.example.appintegradambaas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEOKcz8q85067JukyN14KuqVbjo3amkhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
