@@ -7,16 +7,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.appintegradambaas.R;
 import com.example.appintegradambaas.data.db.AppDatabase;
+import com.example.appintegradambaas.data.entities.Appointment;
 import com.example.appintegradambaas.data.entities.User;
 import com.example.appintegradambaas.utils.NetworkUtils;
 import com.example.appintegradambaas.utils.SessionManager;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import android.content.Context;
+import com.example.appintegradambaas.data.db.AppDatabase;
+import com.example.appintegradambaas.data.entities.Appointment;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,6 +40,12 @@ public class HomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
+// Ajustar márgenes automáticamente para evitar solaparse con la barra de estado
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
+            int top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).top;
+            v.setPadding(0, top, 0, 0);
+            return insets;
+        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,6 +87,41 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+
+
+    public static class SyncManager {
+
+        public static void syncAppointments(Context context) {
+            FirebaseFirestore fs = FirebaseFirestore.getInstance();
+            AppDatabase db = AppDatabase.get(context);
+
+            new Thread(() -> {
+                List<Appointment> list = db.appointmentDao().getAll();
+                for (Appointment a : list) {
+                    if (a.pendingDelete) {
+                        // 🔹 Si estaba marcada para eliminar, eliminar también en Firebase
+                        fs.collection("appointments")
+                                .document(String.valueOf(a.id))
+                                .delete()
+                                .addOnSuccessListener(v -> new Thread(() -> {
+                                    db.appointmentDao().delete(a); // Eliminar de Room después de éxito remoto
+                                }).start());
+                    } else if (a.pendingSync) {
+                        // 🔹 Si está marcada para sincronizar (insert/update)
+                        fs.collection("appointments")
+                                .document(String.valueOf(a.id))
+                                .set(a)
+                                .addOnSuccessListener(v -> new Thread(() -> {
+                                    a.pendingSync = false;
+                                    db.appointmentDao().update(a);
+                                }).start());
+                    }
+                }
+            }).start();
+        }
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -78,16 +129,25 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.action_profile) {
             startActivity(new Intent(this, ProfileActivity.class));
             return true;
+
         } else if (id == R.id.action_map) {
             startActivity(new Intent(this, MapActivity.class));
             return true;
+
+            // ✅ Nuevo caso para Citas Médicas
+        } else if (id == R.id.action_appointments) {
+            startActivity(new Intent(this, AppointmentsActivity.class));
+            return true;
+
         } else if (id == R.id.action_logout) {
             new SessionManager(this).logout();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
+
 
 }

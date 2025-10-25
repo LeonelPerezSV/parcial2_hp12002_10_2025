@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- 🔹 Barra superior -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_appointments"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:elevation="4dp" />
+
+    <!-- 🔹 Lista de citas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerAppointments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_appointments"
+        android:layout_above="@+id/fabAdd"
+        android:padding="8dp" />
+
+    <!-- 🔹 Botón flotante para agregar cita -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:src="@android:drawable/ic_input_add"
+        app:tint="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        app:backgroundTint="?attr/colorPrimary" />
+
+</RelativeLayout>

@@ -39,4 +39,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(ues).title("Universidad de El Salvador"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ues, 15f));
     }
+
+    public GoogleMap getMap() {
+        return mMap;
+    }
 }

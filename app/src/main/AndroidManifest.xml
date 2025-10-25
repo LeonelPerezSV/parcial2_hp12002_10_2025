@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,15 +17,16 @@
         android:theme="@style/Theme.AppIntegradaMBaaS"
         tools:targetApi="31">
 
-        <!-- Google Maps API KEY (replace with a valid one) -->
+        <!-- Google Maps API KEY -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAe2CpV6iaK-fwnavL9hblG7KV76syuRxA"/>
+            android:value="AIzaSyAe2CpV6iaK-fwnavL9hblG7KV76syuRxA" />
 
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
+
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true">
@@ -35,7 +36,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.MapActivity" android:exported="true" />
+        <activity
+            android:name=".activities.MapActivity"
+            android:exported="true" />
+
+        <!-- ✅ NUEVAS ACTIVIDADES PARA EL CRUD DE CITAS -->
+        <activity
+            android:name=".activities.AppointmentsActivity"
+            android:exported="true"
+            android:label="Citas Médicas"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
+        <activity
+            android:name=".activities.AppointmentFormActivity"
+            android:exported="true"
+            android:label="Nueva Cita"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
     </application>
 </manifest>

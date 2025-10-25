@@ -6,6 +6,9 @@ import android.util.Patterns;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
+
+        //Ajustar márgenes automáticamente para evitar solaparse con la barra de estado
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (v, insets) -> {
+            int top = insets.getInsets(WindowInsetsCompat.Type.systemBars()).top;
+            v.setPadding(0, top, 0, 0);
+            return insets;
+        });
 
         inputName = findViewById(R.id.inputName);
         inputEmail = findViewById(R.id.inputEmail);

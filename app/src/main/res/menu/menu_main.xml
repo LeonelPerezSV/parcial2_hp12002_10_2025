@@ -1,5 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_profile" android:title="@string/profile_title"/>
-    <item android:id="@+id/action_map" android:title="Ver Mapa"/>
-    <item android:id="@+id/action_logout" android:title="@string/logout"/>
+    <item
+        android:id="@+id/action_profile"
+        android:title="Perfil"
+        android:icon="@drawable/ic_person"
+        android:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_map"
+        android:title="Mapa"
+        android:icon="@drawable/ic_map"
+        android:showAsAction="never" />
+
+    <!-- ✅ NUEVO ITEM -->
+    <item
+        android:id="@+id/action_appointments"
+        android:title="Citas Médicas"
+        android:icon="@drawable/ic_calendar"
+        android:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:title="Cerrar sesión"
+        android:icon="@drawable/ic_logout"
+        android:showAsAction="never" />
 </menu>
