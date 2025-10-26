@@ -35,11 +35,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng ues = new LatLng(13.71622, -89.20323);
-        mMap.addMarker(new MarkerOptions().position(ues).title("Universidad de El Salvador"));
+        LatLng ues = new LatLng(13.698323290060744, -89.2099592751934);
+        mMap.addMarker(new MarkerOptions().position(ues).title("Ubicación ClinicApp"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ues, 15f));
     }
-
+//13.698323290060744, -89.2099592751934
     public GoogleMap getMap() {
         return mMap;
     }

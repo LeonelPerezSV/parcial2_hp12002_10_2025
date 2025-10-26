@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_map"
         android:showAsAction="never" />
 
-    <!-- ✅ NUEVO ITEM -->
+    <!-- NUEVO ITEM PARA EL PARCIAL -->
     <item
         android:id="@+id/action_appointments"
         android:title="Citas Médicas"

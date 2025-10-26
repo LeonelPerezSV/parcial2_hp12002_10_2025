@@ -63,6 +63,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void syncPendingIfAny(){
         if (!NetworkUtils.isOnline(this)) return;
+
+        SyncManager.syncAppointments(this);
+
         AsyncTask.execute(() -> {
             String email = sm.getEmail();
             if (email == null) return;
@@ -99,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
                 List<Appointment> list = db.appointmentDao().getAll();
                 for (Appointment a : list) {
                     if (a.pendingDelete) {
-                        // 🔹 Si estaba marcada para eliminar, eliminar también en Firebase
+                        //  Si estaba marcada para eliminar, eliminar también en Firebase
                         fs.collection("appointments")
                                 .document(String.valueOf(a.id))
                                 .delete()
@@ -107,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                                     db.appointmentDao().delete(a); // Eliminar de Room después de éxito remoto
                                 }).start());
                     } else if (a.pendingSync) {
-                        // 🔹 Si está marcada para sincronizar (insert/update)
+                        //  Si está marcada para sincronizar (insert/update)
                         fs.collection("appointments")
                                 .document(String.valueOf(a.id))
                                 .set(a)
@@ -134,7 +137,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(new Intent(this, MapActivity.class));
             return true;
 
-            // ✅ Nuevo caso para Citas Médicas
+            //  Nuevo caso para Citas Médicas
         } else if (id == R.id.action_appointments) {
             startActivity(new Intent(this, AppointmentsActivity.class));
             return true;

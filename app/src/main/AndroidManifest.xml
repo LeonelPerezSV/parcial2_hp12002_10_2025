@@ -40,7 +40,7 @@
             android:name=".activities.MapActivity"
             android:exported="true" />
 
-        <!-- ✅ NUEVAS ACTIVIDADES PARA EL CRUD DE CITAS -->
+        <!-- NUEVAS ACTIVIDADES PARA EL CRUD DE CITAS -->
         <activity
             android:name=".activities.AppointmentsActivity"
             android:exported="true"
